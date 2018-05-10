@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    fetching: null,
+    fetchingUsers: null,
     users: [],
   },
   getters: {
@@ -14,8 +14,8 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    SET_FETCHING (state, fetching) {
-      state.fetching = fetching
+    SET_FETCHING_USERS (state, fetching) {
+      state.fetchingUsers = fetching
     },
     SET_USERS (state, users) {
       state.users = users
@@ -23,16 +23,16 @@ export default new Vuex.Store({
   },
   actions: {
     FETCH_USERS ({commit, state}) {
-      if (state.fetching) {
-        return state.fetching
+      if (state.fetchingUsers) {
+        return state.fetchingUsers
       }
 
       const promise = fetch('http://jsonplaceholder.typicode.com/users')
-      commit('SET_FETCHING', promise)
+      commit('SET_FETCHING_USERS', promise)
       return promise.then(res => res.json()).then(users => {
         commit('SET_USERS', users)
-        commit('SET_FETCHING', null)
+        commit('SET_FETCHING_USERS', null)
       })
-    }
+    },
   }
 })

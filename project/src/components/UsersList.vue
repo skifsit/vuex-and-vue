@@ -1,6 +1,6 @@
 <template>
   <div :style="styleObj">
-    <div v-if="fetching">
+    <div v-if="fetchingUsers">
       FETCHING...
     </div>
     <div v-else="">
@@ -31,7 +31,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['fetching', 'users']),
+    ...mapState(['fetchingUsers', 'users']),
     ...mapGetters(['GET_REVERSED_USERS']),
   },
   methods: {

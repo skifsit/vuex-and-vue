@@ -5,27 +5,13 @@
     </router-link>
     <br />
     <router-link to="/">
-      Dashboard
+      {{fetchingUsers ? 'Fetching USERS...' : 'Users ' + users.length}}
     </router-link>
     <br />
-    <router-link to="/">
-      Charts
+    <router-link to="/posts/list">
+      Posts List
     </router-link>
     <br />
-    <router-link to="/">
-      Settings
-    </router-link>
-    <br />
-    <router-link to="/">
-      LogOut
-    </router-link>
-    <br />
-    <router-link to="/">
-      {{fetching ? 'Fetching...' : 'Users ' + users.length}}
-    </router-link>
-    <br />
-    {{a}}
-    {{ab}}
   </nav>
 </template>
 
@@ -40,33 +26,20 @@ export default {
     }
   },
   data () {
-    return {
-      a: 1
-    }
+    return {}
   },
-  // computed: mapState({
-  //   'fetchingUsers': 'fetching',
-  //   'usersList': 'users',
-  // }),
   computed: {
-    ab () {
-      return this.a + this.a
-    },
-    ...mapState(['fetching', 'users']),
+    ...mapState(['fetchingUsers', 'users', 'fetchingPosts', 'posts']),
     ...mapGetters(['GET_REVERSED_USERS']),
   },
   methods: {
     ...mapMutations(['SET_FETCHING', 'SET_USERS']),
     ...mapActions(['FETCH_USERS']),
     loadUsers () {
-      // this.$store.dispatch('FETCH_USERS')
       this.FETCH_USERS()
-    }
+    },
   },
   mounted () {
-    setTimeout(() => {
-      this.a = 5
-    }, 5000)
     this.loadUsers()
   }
 }
