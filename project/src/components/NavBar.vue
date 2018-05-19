@@ -12,6 +12,10 @@
       Posts List
     </router-link>
     <br />
+    <router-link to="/map">
+      Map
+    </router-link>
+    <br />
   </nav>
 </template>
 

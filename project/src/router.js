@@ -15,6 +15,10 @@ export default new Router({
     {
       path: '/posts/list',
       component: () => import('./views/Post')
+    },
+    {
+      path: '/map',
+      component: () => import('./views/Map')
     }
   ]
 })

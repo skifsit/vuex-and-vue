@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     fetchingUsers: null,
     users: [],
+    mapInstance: null,
   },
   getters: {
     GET_REVERSED_USERS (state) {
