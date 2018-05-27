@@ -1,5 +1,6 @@
 <template>
   <div :style="styleObj">
+    <button @click="openModal1($event)">OPEN MODAL 1</button>
     <div v-if="fetchingUsers">
       FETCHING...
     </div>
@@ -13,14 +14,28 @@
         <div>{{user.email}}</div>
       </router-link>
     </div>
+    <button @click="openModal2($event)">OPEN MODAL 2</button>
+    <Modal :modalOpened="modalOpened1"
+           :modalTransform="modalTransform1" @close="closeModal1" >
+      THIS IS MODAL CONTENT 1
+    </Modal>
+    <Modal :modalOpened="modalOpened2"
+           :modalTransform="modalTransform2"
+           @close="closeModal2" >
+      THIS IS MODAL CONTENT 2
+    </Modal>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import {Modal, prepareModalOpened} from './Modal'
 
 export default {
   name: 'UsersList',
+  components: {
+    Modal
+  },
   props: {
     styleObj: {
       type: Object,
@@ -28,6 +43,10 @@ export default {
   },
   data () {
     return {
+      modalOpened1: false,
+      modalTransform1: '',
+      modalOpened2: false,
+      modalTransform2: '',
     }
   },
   computed: {
@@ -39,58 +58,20 @@ export default {
     ...mapActions(['FETCH_USERS']),
     loadUsers () {
       this.FETCH_USERS()
-      // this.$store.getters['GET_REVERSED_USERS']
-      // this.$store.dispatch('FETCH_USERS')
-      // this.SET_USERS([
-      //   {
-      //     "id": 1,
-      //     "name": "Leanne Graham",
-      //     "username": "Bret",
-      //     "email": "Sincere@april.biz",
-      //     "address": {
-      //       "street": "Kulas Light",
-      //       "suite": "Apt. 556",
-      //       "city": "Gwenborough",
-      //       "zipcode": "92998-3874",
-      //       "geo": {
-      //         "lat": "-37.3159",
-      //         "lng": "81.1496"
-      //       }
-      //     },
-      //     "phone": "1-770-736-8031 x56442",
-      //     "website": "hildegard.org",
-      //     "company": {
-      //       "name": "Romaguera-Crona",
-      //       "catchPhrase": "Multi-layered client-server neural-net",
-      //       "bs": "harness real-time e-markets"
-      //     }
-      //   },
-      // ])
-      // this.$store.commit('SET_USERS', [
-      //   {
-      //     "id": 1,
-      //     "name": "Leanne Graham",
-      //     "username": "Bret",
-      //     "email": "Sincere@april.biz",
-      //     "address": {
-      //       "street": "Kulas Light",
-      //       "suite": "Apt. 556",
-      //       "city": "Gwenborough",
-      //       "zipcode": "92998-3874",
-      //       "geo": {
-      //         "lat": "-37.3159",
-      //         "lng": "81.1496"
-      //       }
-      //     },
-      //     "phone": "1-770-736-8031 x56442",
-      //     "website": "hildegard.org",
-      //     "company": {
-      //       "name": "Romaguera-Crona",
-      //       "catchPhrase": "Multi-layered client-server neural-net",
-      //       "bs": "harness real-time e-markets"
-      //     }
-      //   },
-      // ])
+    },
+    openModal1 (e) {
+      this.modalOpened1 = true
+      this.modalTransform1 = prepareModalOpened(e)
+    },
+    closeModal1 () {
+      this.modalOpened1 = false
+    },
+    openModal2 (e) {
+      this.modalOpened2 = true
+      this.modalTransform2 = prepareModalOpened(e)
+    },
+    closeModal2 () {
+      this.modalOpened2 = false
     }
   },
   mounted () {
