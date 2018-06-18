@@ -5,14 +5,21 @@
       FETCHING...
     </div>
     <div v-else="">
-      <router-link v-for="user in GET_REVERSED_USERS"
-           :key="user.id"
-           :to="`/users/${user.id}`"
-           class="flex-row border">
-        <div>{{user.id}}</div>
-        <div>{{user.name}}</div>
-        <div>{{user.email}}</div>
-      </router-link>
+      <table class="table">
+        <tbody>
+        <tr v-for="user in GET_REVERSED_USERS" :key="user.id">
+          <td>
+            <router-link :to="`/users/${user.id}`">{{user.id}}</router-link>
+          </td>
+          <td>
+            <router-link :to="`/users/${user.id}`">{{user.name}}</router-link>
+          </td>
+          <td>
+            <router-link :to="`/users/${user.id}`">{{user.email}}</router-link>
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
     <button @click="openModal2($event)">OPEN MODAL 2</button>
     <Modal :modalOpened="modalOpened1"
