@@ -16,6 +16,9 @@
       Map
     </router-link>
     <br />
+    <router-link to="/chart">
+      Chart
+    </router-link>
   </nav>
 </template>
 

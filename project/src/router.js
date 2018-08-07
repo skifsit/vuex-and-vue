@@ -21,6 +21,10 @@ export default new Router({
       component: () => import('./views/Map')
     },
     {
+      path: '/chart',
+      component: () => import('./views/Chart')
+    },
+    {
       path: '/login',
       component: Login
     },
